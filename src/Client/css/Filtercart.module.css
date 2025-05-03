@@ -1,0 +1,35 @@
+.out{
+    display: flex;
+    width: 1200px;
+    align-content: center;
+    justify-content: space-between;
+}
+.filedcenter{
+    width:280px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.rangeoutline{
+    display: flex;
+    flex-direction: column;
+    min-height: 60px;
+    min-width: 20%;
+    justify-content: space-around;
+}
+.rangehead{
+    display: flex;
+    justify-content: space-around;
+}
+.filedcenter input[type="text"]{
+    outline: none;
+    border: none;
+    width: 210px;
+    height:25px;
+}
+.filedcenter select{
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    outline: none;
+}
