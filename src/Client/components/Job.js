@@ -1,8 +1,11 @@
 import React from 'react'
 import job from '../css/Job.module.css'
-import img from '../assets/logo1.png'
-import { BsPersonPlus } from "react-icons/bs"
 import { PiBuildingsThin, PiStackLight } from "react-icons/pi"
+
+import { TfiTime } from "react-icons/tfi";
+
+import { BsCurrencyRupee } from "react-icons/bs";
+
 
 const Job = ({ jobtitle, jobtype,companylogo,minexp, maxexp, maxsalary, deadline }) => {
   
@@ -57,9 +60,9 @@ const Job = ({ jobtitle, jobtype,companylogo,minexp, maxexp, maxsalary, deadline
       <div className={job.outlinediv2}>
         <div className={job.title}>{jobtitle}</div>
         <div className={job.icons}>
-          <div><BsPersonPlus size={17} /> {minexp}-{maxexp}yr Exp</div>
+          <div><TfiTime size={17} /> {minexp}-{maxexp} years</div>
           <div><PiBuildingsThin size={17} /> {jobtype}</div>
-          <div><PiStackLight size={17} /> {salary}</div>
+          <div><BsCurrencyRupee size={17} /> {salary}</div>
         </div>
         <div className={job.content}>
           <ul>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { CiSearch } from "react-icons/ci";
-import { GiSupersonicArrow } from "react-icons/gi";
 import { TfiLocationPin } from "react-icons/tfi";
 import filetring from '../css/Filtercart.module.css';
 import Slider from '@mui/material/Slider';
+import { MdWorkOutline } from "react-icons/md";
 
 const Filtercart = ({range, handlesearch, filterchange }) => {
   const [value, setValue] = useState([20, 40]);  
@@ -49,7 +49,7 @@ const Filtercart = ({range, handlesearch, filterchange }) => {
         <hr />
 
         <div className={filetring.filedcenter}>
-          <GiSupersonicArrow size={20} />
+          <MdWorkOutline size={20} />
           <select name="jobtype" onChange={filterchange}>
             <option value="">Job type</option>
               <option value="Fulltime">Full Time</option>

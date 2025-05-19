@@ -7,35 +7,29 @@ router.get('/', (req, res) => {
 });
 
 router.post('/createjob', async (req, res) => {
-  const {
-    jobTitle,
-    companyName,
-    location,
-    jobType,
-    minsalary,
-    maxsalary,
-    applicationDeadline,
-    jobDescription
-  } = req.body;
+
+const { jobTitle, companyName, location, minsalary, maxsalary, jobDescription,applicationDeadline } = req.body;
+
+  if (!jobTitle || !companyName || !location || minsalary == null || maxsalary == null || !jobDescription) {
+    return res.status(400).json({ message: "All fields are required and must be filled in." });
+  }
 
   try {
     const newJob = new Job({
       jobTitle,
       companyName,
       location,
-      jobType,
       minsalary,
       maxsalary,
-      applicationDeadline: new Date(applicationDeadline),
-      jobDescription
+      applicationDeadline,
+      jobDescription,
     });
 
     await newJob.save();
-
-    res.status(201).json({ message: 'Job posted successfully!', job: newJob });
-  } catch (error) {
-    console.error('Error creating job:', error);
-    res.status(500).json({ error: 'Failed to post job, please try again later.' });
+    res.status(201).json({ message: "Job created successfully!" });
+  } catch (err) {
+    console.error("Error creating job:", err);
+    res.status(500).json({ message: "Server error while creating job." });
   }
 });
 

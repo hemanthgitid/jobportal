@@ -3,6 +3,7 @@
     width: 1200px;
     align-content: center;
     justify-content: space-between;
+    opacity: 0.6;
 }
 .filedcenter{
     width:280px;

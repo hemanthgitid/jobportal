@@ -1,4 +1,8 @@
+*{
+  
+  font-family: 'Satoshi', sans-serif;
 
+}
 .outline2{
     display: flex;
     flex-direction: column;

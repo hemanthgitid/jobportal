@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar.js';
 import Filtercart from '../components/Filtercart.js';
@@ -18,52 +19,87 @@ const Home = () => {
     maxsalary: 0,
   });
 
-  const initialMount = useRef(true); 
+  const initialMount = useRef(true);
 
   const handleCreatejob = () => {
     setisCreateJob(!isCreateJob);
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:5000/admin/jobs')
-      .then((response) => {
-        setJobs(response.data || []);
-      })
-      .catch((error) => {
-        console.error('Failed to fetch jobs:', error);
-        setJobs([]);
-      });
-  }, [isCreateJob]);
-
-  useEffect(() => {
-    if (initialMount.current) {
-      initialMount.current = false; 
-      return;
-    }
-
-    const fetchFilteredData = async () => {
+    const fetchAllJobs = async () => {
       try {
-        const { location, jobtype, minsalary, maxsalary } = filter;
-
-        const response = await axios.get('http://localhost:5000/admin/filter', {
-          params: {
-            location,
-            jobtype,
-            minsalary,
-            maxsalary,
-          },
-        });
-
-        setJobs(response.data.resdata || []);
+        const response = await axios.get('http://localhost:5000/admin/jobs');
+        setJobs(response.data || []);
       } catch (error) {
-        console.error('Error fetching filtered data:', error);
+        console.error('Failed to fetch jobs:', error);
         setJobs([]);
       }
     };
 
-    fetchFilteredData();
-  }, [filter]);
+    fetchAllJobs();
+    document.title = 'CyberMinds Job Portal';
+  }, [isCreateJob]);
+
+  useEffect(() => {
+    if (initialMount.current) {
+      initialMount.current = false;
+      return;
+    }
+
+    if (
+      !filter.location &&
+      !filter.jobtype &&
+      filter.minsalary === 0 &&
+      filter.maxsalary === 0 &&
+      !bar
+    ) {
+      const fetchAllJobs = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/admin/jobs');
+          setJobs(response.data || []);
+        } catch (error) {
+          console.error('Failed to fetch jobs:', error);
+          setJobs([]);
+        }
+      };
+      fetchAllJobs();
+    } else {
+      const fetchFilteredData = async () => {
+        try {
+          const { location, jobtype, minsalary, maxsalary } = filter;
+
+          const response = await axios.get('http://localhost:5000/admin/filter', {
+            params: {
+              location,
+              jobtype,
+              minsalary,
+              maxsalary,
+            },
+          });
+
+          setJobs(response.data.resdata || []);
+        } catch (error) {
+          console.error('Error fetching filtered data:', error);
+          setJobs([]);
+        }
+      };
+
+      if (bar) {
+        const fetchSearchResults = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5000/admin/bar?name=${bar}`);
+            setJobs(response.data.resdata || []);
+          } catch (error) {
+            console.error('Search Error:', error);
+            setJobs([]);
+          }
+        };
+        fetchSearchResults();
+      } else {
+        fetchFilteredData();
+      }
+    }
+  }, [filter, bar]);
 
   const rangeSelector = (event, newValue) => {
     setValue(newValue);
@@ -82,16 +118,7 @@ const Home = () => {
   const handlesearchbar = (e) => {
     const query = e.target.value;
     setBar(query);
-    axios
-      .get(`http://localhost:5000/admin/bar?name=${query}`)
-      .then((res) => setJobs(res.data.resdata))
-      .catch((err) => {
-        console.error('Search Error:', err);
-        setJobs([]);
-      });
   };
-  console.log("jobs");
-  console.log(jobs);
 
   return (
     <>
@@ -106,7 +133,7 @@ const Home = () => {
         </div>
         <div className={Homecss.outline3}>
           {jobs.length === 0 ? (
-            <p>No jobs found.</p>
+            <div>No jobs found.🫣</div>
           ) : (
             <>
               {jobs.map((job) => (

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import CreateJobcss from '../css/CreateJob.module.css';
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { RxDoubleArrowRight } from "react-icons/rx";
+import axios from 'axios';
 
-import axios from 'axios'
 const CreateJob = ({ createjob }) => {
   const [jobDetails, setJobDetails] = useState({
     jobTitle: '',
@@ -29,58 +29,45 @@ const CreateJob = ({ createjob }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setJobDetails(prevState => ({
       ...prevState,
       [name]: value
     }));
-  
+
     setErrors(prevState => {
       const newErrors = { ...prevState };
-  
+
       if (value === '' || value === null) {
-        newErrors[name] = true; 
-      }
-      else if (name === 'minsalary' && parseInt(value) < parseInt(jobDetails.salaryMin)) {
-        newErrors[name] = true; 
-      }
-      else if (name === 'maxsalary' && parseInt(value) > parseInt(jobDetails.salaryMax)) {
-        newErrors[name] = true; 
-      }
-      else if (name === 'applicationDeadline' && new Date(value) <= new Date()) {
-        newErrors[name] = true; 
-      }
-      else {
+        newErrors[name] = true;
+      } else if (name === 'minsalary' && parseInt(value) < 0) {
+        newErrors[name] = true;
+      } else if (name === 'maxsalary' && parseInt(value) < parseInt(jobDetails.minsalary)) {
+        newErrors[name] = true;
+      } else if (name === 'applicationDeadline' && new Date(value) <= new Date()) {
+        newErrors[name] = true;
+      } else {
         newErrors[name] = false;
       }
-  
+
       return newErrors;
     });
   };
-  
 
-  const handleSubmit = async(e) => {
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(errors);
     const isValid = !Object.values(errors).includes(true);
-     console.log(jobDetails);
     if (isValid) {
-      try { 
-        console.log(jobDetails);
+      try {
         const response = await axios.post(
-          'http://localhost:5000/admin/createjob',  
+          'http://localhost:5000/admin/createjob',
           jobDetails
         );
-
         console.log('Job posted successfully:', response.data);
-  
         createjob();
-  
       } catch (error) {
         console.error('Error posting job:', error.response?.data || error.message);
       }
-
     } else {
       console.log('Form is not valid.');
     }
@@ -94,20 +81,22 @@ const CreateJob = ({ createjob }) => {
       <div className={CreateJobcss.innerInput1}>
         <div className={CreateJobcss.innerInput3}>
           <div>
-            <h4>Job Title</h4>
+            <p>Job Title <span style={{ color: 'red' }}>*</span></p>
             <input
               type='text'
               name="jobTitle"
+              required
               value={jobDetails.jobTitle}
               onChange={handleChange}
               style={{ border: errors.jobTitle ? "1px solid red" : "1px solid #ccc" }}
             />
           </div>
           <div>
-            <h4>Company Name</h4>
+            <p>Company Name <span style={{ color: 'red' }}>*</span></p>
             <input
               type='text'
               name="companyName"
+              required
               value={jobDetails.companyName}
               onChange={handleChange}
               placeholder='Amazon, Microsoft, Swiggy'
@@ -117,9 +106,10 @@ const CreateJob = ({ createjob }) => {
         </div>
         <div className={CreateJobcss.innerInput3}>
           <div>
-            <h4>Location</h4>
+            <p>Location <span style={{ color: 'red' }}>*</span></p>
             <select
               name="location"
+              required
               value={jobDetails.location}
               onChange={handleChange}
               style={{ border: errors.location ? "1px solid red" : "1px solid #ccc" }}
@@ -141,9 +131,10 @@ const CreateJob = ({ createjob }) => {
             </select>
           </div>
           <div>
-            <h4>Job Type</h4>
+            <p>Job Type <span style={{ color: 'red' }}>*</span></p>
             <select
               name="jobType"
+              required
               value={jobDetails.jobType}
               onChange={handleChange}
               style={{ border: errors.jobType ? "1px solid red" : "1px solid #ccc" }}
@@ -151,49 +142,53 @@ const CreateJob = ({ createjob }) => {
               <option value="">Preferred Job Type</option>
               <option value="Fulltime">Full Time</option>
               <option value="Internship">Internship</option>
-              <option value="Partime">Partime</option>
+              <option value="Partime">Part-time</option>
               <option value="Contract">Contract</option>
             </select>
           </div>
         </div>
         <div className={CreateJobcss.innerInput3}>
           <div>
-            <h4>Salary Range</h4>
+            <p>Salary Range <span style={{ color: 'red' }}>*</span></p>
             <input
               type="number"
               name="minsalary"
-              value={jobDetails.salaryMin}
+              required
+              value={jobDetails.minsalary}
               onChange={handleChange}
-              placeholder="&#8593; &#8595; $0"
-              style={{ border: errors.salaryMin ? "1px solid red" : "1px solid #ccc" }}
+              placeholder="Minimum Salary"
+              style={{ border: errors.minsalary ? "1px solid red" : "1px solid #ccc", marginRight: "10px" }}
             />
             <input
               type="number"
               name="maxsalary"
-              value={jobDetails.salaryMax}
+              required
+              value={jobDetails.maxsalary}
               onChange={handleChange}
-              placeholder="&#8593; &#8595; $12,00,000"
-              style={{ border: errors.salaryMax ? "1px solid red" : "1px solid #ccc" }}
+              placeholder="Maximum Salary"
+              style={{ border: errors.maxsalary ? "1px solid red" : "1px solid #ccc" }}
             />
           </div>
           <div>
-            <h4>Application Deadline</h4>
+            <p>Application Deadline <span style={{ color: 'red' }}>*</span></p>
             <input
-                type='date'
-                name="applicationDeadline"
-                value={jobDetails.applicationDeadline }           
-                onChange={handleChange}
-                style={{ border: errors.applicationDeadline ? "1px solid red" : "1px solid #ccc" }}
-              />
+              type='date'
+              name="applicationDeadline"
+              required
+              value={jobDetails.applicationDeadline}
+              onChange={handleChange}
+              style={{ border: errors.applicationDeadline ? "1px solid red" : "1px solid #ccc" }}
+            />
           </div>
         </div>
         <div className={CreateJobcss.innerInput3}>
           <div>
-            <h4>Job Description</h4>
+            <p>Job Description <span style={{ color: 'red' }}>*</span></p>
             <textarea
               name="jobDescription"
+              required
               rows="7"
-              cols="70"
+              cols="78"
               value={jobDetails.jobDescription}
               onChange={handleChange}
               placeholder='Please share a description to let the candidate know more about the job role'
