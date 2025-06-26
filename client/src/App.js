@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route} from "react-router-dom";
-// import Home from './Client/pages/Home';
 import Home from './pages/Home.js';
 const App = () => {
   return (
