@@ -48,7 +48,7 @@ useEffect(() => {
   };
 
   fetchAllJobs();
-  document.title = 'CyberMinds Job Portal';
+  document.title = 'Cybermind Works Job Portal';
 }, [isCreateJob]);
 
   //   fetchAllJobs();
