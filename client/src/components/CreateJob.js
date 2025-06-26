@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateJob = ({ createjob }) => {
-  const API = process.env.REACT_APP_BACKEND_URL;
   const [jobDetails, setJobDetails] = useState({
     jobTitle: '',
     companyName: '',
@@ -73,7 +72,7 @@ const CreateJob = ({ createjob }) => {
   if (isValid) {
     try {
       const response = await axios.post(
-        `${API}/admin/createjob`,
+        `http://localhost:5000/admin/createjob`,
         jobDetails
       );
       console.log('Job posted successfully:', response.data);
