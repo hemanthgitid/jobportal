@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.navbar_head{
+    width: 890px;
+    min-height: 60px;
+    margin-top: 21px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.navbar_head ul li{
+    cursor: pointer;
+}
+.navbar_head ul {
+    display: flex;
+    align-items: center;
+    width: 838px;
+    height: 48px;
+    margin-left: 26px;
+    font-size: 16px;
+    justify-content: space-around;
+    list-style-type: none;
+    border-radius:122px;
+    box-shadow: 0px 0px 3px 1px rgba(18, 17, 17, 0.1);    
+     padding: 0.2em;
+}
+.navbar_head ul li button{
+    background-color:blueviolet;
+    color: white;
+    min-width: 100px;
+    cursor: pointer;
+    height: 30px;
+    padding: 0.1em;
+    border: none;
+    border-radius: 30px;
+}

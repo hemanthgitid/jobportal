@@ -1,0 +1,97 @@
+.outline{
+    min-width: 280px;
+    min-height: 310px;
+    display: flex;
+    flex-direction:column;
+    position: relative;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0px 0px 3px 1px rgba(140, 140, 140, 0.1);    
+    margin: 0;
+    border-radius: 8px;
+    padding:0.5em;
+}
+.content {
+    width: 272px;        
+    height: 120px;
+    opacity: 0.7;
+    font-size: 14px;
+    margin: 20px auto;   
+}
+
+.content ul {
+    padding-left: 19px;
+     list-style-type:disc ;   
+    margin: 0;             
+}
+
+.content li {
+    margin-bottom:5px;    
+}
+
+.outlinediv{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    min-width:100%;
+}
+.outlinediv2{
+     max-height: 145px;
+     min-width: 247px;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+    }
+    .outlinediv button{
+        width:270px;
+        height: 46px;
+        left: 16px;
+        padding-left:10px;
+        padding-top:12px ;
+        padding-right:10px ;
+        padding-bottom:10px ;
+        border: none;
+        font-size: 16px;
+        background-color:#00a6fb;
+        color:white;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    .title{
+        min-width: 190px;
+        height: 27px;
+        top: 117px;
+        left: 16px;
+        font-size: 20px;
+        line-height: 100%;
+        font-weight: 700;
+        letter-spacing: 0%;
+    }
+    .icons{
+        display: flex;
+        width: 100%;
+        opacity: 0.7;
+        height: 22px;
+        margin-top:15px;
+        font-size: 16px;
+        justify-content:space-between;
+    }
+    .icons div{
+        display: flex; 
+        justify-content: space-evenly;
+        min-width: 30%;
+        align-items: center;
+}
+.timing{
+    padding: 0.7em;
+    border-radius: 7px;
+    margin-left: 100px;
+    min-width: 20%;
+    margin-top: -30px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: black;
+    background-color:#B0D9FF;
+    
+}
+

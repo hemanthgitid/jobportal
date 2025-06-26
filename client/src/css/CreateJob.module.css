@@ -1,0 +1,89 @@
+.outline{
+   position: absolute;
+   width: 560px;
+   top: 50px;
+   left: 230px;
+   height: 500px;
+   border-radius:15px;
+   padding: 1em;
+   flex-direction: column;
+   display: flex;
+   background-color: white;
+   box-shadow: 0px 0px 3px 1px rgba(7, 7, 7, 0.1);    
+   justify-content: center;
+   align-items:center;
+}
+.innerInput1{
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    min-height: 70%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+}
+
+.innerInput3 input[type="text"],select,input[type="date"]{
+    margin-top: 0.5em;
+    min-width:250px;
+    text-indent: 10px;    
+    min-height: 30px;
+}
+.innerInput3 input[type="number"]{
+    width: 110px;
+    text-indent: 10px;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    height: 30px;
+}
+.innerInput3 textarea::placeholder{
+    padding-top: 1em;
+}
+.innerInput3  textarea{
+    margin-top: 0.5em;
+    min-width:100%;
+    text-indent: 10px;    
+    border-radius: 6px;
+    display: flex;
+    min-height: 30px;
+}
+.innerInput3 textarea::placeholder{
+    font-size: 10px;
+}
+.innerInput3{
+    display:flex;
+    margin: 0.5em;
+    min-width: 100%;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+select{
+    border: 1px solid grey;
+    padding: 0.5em;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.innerInput3 input[type="text"],select,input[type="date"],input[type="number"],textarea:focus{
+    outline: none;
+}
+.buttons{
+  min-width: 95%;
+  min-height: 7%;
+  display: flex;
+  justify-content: space-between;
+}
+.buttons button:hover{
+    background-color: #06a4f4;
+    color: white;
+    border: none;
+}
+.buttons button{
+    cursor: pointer;
+    background-color: white;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    min-width: 25%;
+}
