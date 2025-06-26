@@ -23,12 +23,12 @@ const adminRoutes = require('./routes/adminRoutes.js');
 app.use('/admin', adminRoutes);
 // Use routes with base path '/admin'
 
-// Serve static files from React build
-app.use(express.static(path.join(__dirname, '../client/build')));
+// // Serve static files from React build
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.get(/^\/(?!admin|api).*/, (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
-});
+// app.get(/^\/(?!admin|api).*/, (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+// });
 
 
 // Start server
