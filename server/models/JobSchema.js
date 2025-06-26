@@ -31,26 +31,44 @@ const JobSchema = new mongoose.Schema({
     enum: ['Fulltime', 'Partime', 'Contract', 'Internship','Onsite'],
     default: 'Onsite'
   },
-  minsalary: {
+   minsalary: {
     type: Number,
     required: true,
-    min: 0,
     validate: {
       validator: function (value) {
-        return value <= this.maxsalary;
+        if (value < 0) {
+          this.minsalary = 0;
+          return true; 
+        }
+        
+        if (value > 2000000) {
+          this.minsalary = 2000000;
+          return true;
+        }
+
+        return value >= 0 && value <= this.maxsalary;
       },
-      message: 'Minimum salary must be lesser than or equal to Maximum salary.'
+      message: 'Minimum salary must be between 0 and 20 lakhs, and less than or equal to maximum salary.'
     }
   },
   maxsalary: {
     type: Number,
     required: true,
-    min: 0,
     validate: {
       validator: function (value) {
+        if (value < 0) {
+          this.maxsalary = 500000;
+          return true; 
+        }
+        
+        if (value > 2000000) {
+          this.maxsalary = 2000000;
+          return true; 
+        }
+
         return value >= this.minsalary;
       },
-      message: 'Maximum salary must be greater than or equal to minimum salary.'
+      message: 'Maximum salary must be greater than or equal to minimum salary and less than or equal to 20 lakhs.'
     }
   },
   minExperience: {

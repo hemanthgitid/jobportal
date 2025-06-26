@@ -24,21 +24,11 @@ const Home = () => {
     setisCreateJob(!isCreateJob);
   };
 
-  // useEffect(() => {
-  //   const fetchAllJobs = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:5000/admin/jobs');
-  //       setJobs(response.data || []);
-  //     } catch (error) {
-  //       console.error('Failed to fetch jobs:', error);
-  //       setJobs([]);
-  //     }
-  //   };
+ 
 
 useEffect(() => {
   const fetchAllJobs = async () => {
     try {
-      // Fetch jobs from deployed backend URL
       const response = await axios.get('https://jobportal-2-i5xu.onrender.com/admin/jobs');
       setJobs(response.data || []);
     } catch (error) {
@@ -51,71 +41,7 @@ useEffect(() => {
   document.title = 'Cybermind Works Job Portal';
 }, [isCreateJob]);
 
-  //   fetchAllJobs();
-  //   document.title = 'CyberMinds Job Portal';
-  // }, [isCreateJob]);
-
-  // useEffect(() => {
-  //   if (initialMount.current) {
-  //     initialMount.current = false;
-  //     return;
-  //   }
-
-  //   if (
-  //     !filter.location &&
-  //     !filter.jobtype &&
-  //     filter.minsalary === 0 &&
-  //     filter.maxsalary === 0 &&
-  //     !bar
-  //   ) {
-  //     const fetchAllJobs = async () => {
-  //       try {
-  //         const response = await axios.get('http://localhost:5000/admin/jobs');
-  //         setJobs(response.data || []);
-  //       } catch (error) {
-  //         console.error('Failed to fetch jobs:', error);
-  //         setJobs([]);
-  //       }
-  //     };
-  //     fetchAllJobs();
-  //   } else {
-  //     const fetchFilteredData = async () => {
-  //       try {
-  //         const { location, jobtype, minsalary, maxsalary } = filter;
-
-  //         const response = await axios.get('http://localhost:5000/admin/filter', {
-  //           params: {
-  //             location,
-  //             jobtype,
-  //             minsalary,
-  //             maxsalary,
-  //           },
-  //         });
-
-  //         setJobs(response.data.resdata || []);
-  //       } catch (error) {
-  //         console.error('Error fetching filtered data:', error);
-  //         setJobs([]);
-  //       }
-  //     };
-
-  //     if (bar) {
-  //       const fetchSearchResults = async () => {
-  //         try {
-  //           const response = await axios.get(`http://localhost:5000/admin/bar?name=${bar}`);
-  //           setJobs(response.data.resdata || []);
-  //         } catch (error) {
-  //           console.error('Search Error:', error);
-  //           setJobs([]);
-  //         }
-  //       };
-  //       fetchSearchResults();
-  //     } else {
-  //       fetchFilteredData();
-  //     }
-  //   }
-  // }, [filter, bar]);
-
+ 
 
 useEffect(() => {
   if (initialMount.current) {

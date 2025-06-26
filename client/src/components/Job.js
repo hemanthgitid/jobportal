@@ -25,17 +25,20 @@ const Job = ({ jobtitle, jobtype,companylogo,minexp, maxexp, maxsalary, deadline
     if (totalHours < 24) return `${totalHours} hr${totalHours === 1 ? "" : "s"} ago`;
     return `${totalDays} day${totalDays === 1 ? "" : "s"} ago`;
 };
+const formatSalary = (amount) => {
+  if (!amount || isNaN(amount)) return 'N/A';
 
-  
-  const formatSalary = (amount) => {
-    if (!amount || isNaN(amount)) return 'N/A';
-  
-    if (amount >= 100000) {
-      return (amount / 100000).toFixed(1) + ' LPA';
-    } else {
-      return (amount / 1000).toFixed(0) + 'K';
-    }
-  };
+  if (amount > 2000000) {
+    amount = 2000000;
+  }
+
+  if (amount >= 100000) {
+    return Math.round(amount / 100000) + ' LPA';
+  } else {
+    return Math.round(amount / 1000) + 'K';
+  }
+};
+
 
   const salary = formatSalary(maxsalary);
   

@@ -66,45 +66,10 @@ const CreateJob = ({ createjob }) => {
     });
   };
 
-//  const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   const isValid = !Object.values(errors).includes(true);
-//   if (isValid) {
-//     try {
-//       const response = await axios.post(
-//         `http://localhost:5000/admin/createjob`,
-//         jobDetails
-//       );
-//       console.log('Job posted successfully:', response.data);
-//       toast.success('Job posted successfully!', {
-//         autoClose: 1500, 
-//         });  
-//       setTimeout(() => {
-//         createjob();  
-//       }, 1500);  
-//     } catch (error) {
-//       console.error('Error posting job:', error.response?.data || error.message);
-//       toast.error('Error posting job. Please try again later.', {
-//         autoClose: 1500, 
-//         });
-//       setTimeout(() => {
-//         createjob();  
-//       }, 1500);  
-//     }
-//   } else {
-//     toast.error('Please fill in all required fields correctly.', {
-//         autoClose: 1500, 
-//     });
-//      setTimeout(() => {
-//         createjob();  
-//       }, 1500);  
-//   }
-// };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // Validate fields before submit
   const isValid = !Object.values(errors).includes(true);
 
   if (isValid) {
