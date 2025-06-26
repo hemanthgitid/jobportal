@@ -17,13 +17,13 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.log(err));
 
-app.use('/admin', adminRoutes); 
 
 app.get('/', (req, res) => {
   res.send('API is running ✅');
 });
 
 app.use(express.static(path.join(__dirname, '../client/build')));
+app.use('/admin', adminRoutes); 
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
