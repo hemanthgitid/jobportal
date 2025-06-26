@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://jobportal-3-1gq0.onrender.com',  // Frontend URL
+  origin: 'https://jobportal-3-1gq0.onrender.com', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Frontend URL
   credentials: true,
 }));
 app.use(express.json());
