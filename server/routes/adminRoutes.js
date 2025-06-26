@@ -8,9 +8,9 @@ router.get('/', (req, res) => {
 
 router.post('/createjob', async (req, res) => {
 
-const { jobTitle, companyName, location, minsalary, maxsalary, jobDescription,applicationDeadline } = req.body;
+const { jobTitle, companyName, location,jobType, minsalary, maxsalary, jobDescription,applicationDeadline } = req.body;
 
-  if (!jobTitle || !companyName || !location || minsalary == null || maxsalary == null || !jobDescription) {
+  if (!jobTitle || !companyName || !location || !jobType || minsalary == null || maxsalary == null || !jobDescription) {
     return res.status(400).json({ message: "All fields are required and must be filled in." });
   }
 
@@ -19,6 +19,7 @@ const { jobTitle, companyName, location, minsalary, maxsalary, jobDescription,ap
       jobTitle,
       companyName,
       location,
+      jobType,
       minsalary,
       maxsalary,
       applicationDeadline,
