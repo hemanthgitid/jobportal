@@ -12,7 +12,7 @@ const CreateJob = ({ createjob }) => {
   jobTitle: '',
   companyName: '',
   location: '',
-  jobType: '',
+  jobtype: '',
   minsalary: '',
   maxsalary: '',
   applicationDeadline: new Date().toISOString().split('T')[0],
@@ -22,7 +22,7 @@ const CreateJob = ({ createjob }) => {
     jobTitle: false,
     companyName: false,
     location: false,
-    jobType: false,
+    jobtype: false,
     minsalary: false,
     maxsalary: false, 
     applicationDeadline: false,
@@ -66,43 +66,74 @@ const CreateJob = ({ createjob }) => {
   };
 
 
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+
+//   const isValid = !Object.values(errors).includes(true);
+
+//   if (isValid) {
+//     try {
+//       // Use deployed backend URL here
+//       console.log("job details")
+//       console.log(jobDetails);
+//       const response = await axios.post(
+//         `https://jobportal-2-i5xu.onrender.com/admin/createjob`,
+//         jobDetails
+//       );
+//       console.log('Job posted successfully:', response.data);
+//       toast.success('Job posted successfully!', {
+//         autoClose: 1500,
+//       });
+//       setTimeout(() => {
+//         createjob();
+//       }, 1500);
+//     } catch (error) {
+//       console.error('Error posting job:', error.response?.data || error.message);
+//       toast.error('Error posting job. Please try again later.', {
+//         autoClose: 1500,
+//       });
+//       setTimeout(() => {
+//         createjob();
+//       }, 1500);
+//     }
+//   } else {
+//     toast.error('Please fill in all required fields correctly.', {
+//       autoClose: 1500,
+//     });
+//     setTimeout(() => {
+//       createjob();
+//     }, 1500);
+//   }
+// };
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+  // Validate form here, then prepare data
+  const payload = {
+    ...jobDetails,
+    minsalary: Number(jobDetails.minsalary),
+    maxsalary: Number(jobDetails.maxsalary),
+    applicationDeadline: jobDetails.applicationDeadline, // already in date string format
+  };
 
   const isValid = !Object.values(errors).includes(true);
 
   if (isValid) {
     try {
-      // Use deployed backend URL here
-      console.log("job details")
-      console.log(jobDetails);
+      console.log("job details to post", payload);
       const response = await axios.post(
         `https://jobportal-2-i5xu.onrender.com/admin/createjob`,
-        jobDetails
+        payload
       );
-      console.log('Job posted successfully:', response.data);
-      toast.success('Job posted successfully!', {
-        autoClose: 1500,
-      });
-      setTimeout(() => {
-        createjob();
-      }, 1500);
+      toast.success('Job posted successfully!', { autoClose: 1500 });
+      setTimeout(() => createjob(), 1500);
     } catch (error) {
       console.error('Error posting job:', error.response?.data || error.message);
-      toast.error('Error posting job. Please try again later.', {
-        autoClose: 1500,
-      });
-      setTimeout(() => {
-        createjob();
-      }, 1500);
+      toast.error('Error posting job. Please try again later.', { autoClose: 1500 });
+      setTimeout(() => createjob(), 1500);
     }
   } else {
-    toast.error('Please fill in all required fields correctly.', {
-      autoClose: 1500,
-    });
-    setTimeout(() => {
-      createjob();
-    }, 1500);
+    toast.error('Please fill in all required fields correctly.', { autoClose: 1500 });
   }
 };
 
@@ -166,11 +197,11 @@ const handleSubmit = async (e) => {
           <div>
             <p>Job Type <span style={{ color: 'red' }}>*</span></p>
             <select
-              name="jobType"
+              name="jobtype"
               required
-              value={jobDetails.jobType}
+              value={jobDetails.jobtype}
               onChange={handleChange}
-              style={{ border: errors.jobType ? "1px solid red" : "1px solid #ccc" }}
+              style={{ border: errors.jobtype ? "1px solid red" : "1px solid #ccc" }}
             >
               <option value="">Preferred Job Type</option>
               <option value="Fulltime">Full Time</option>

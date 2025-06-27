@@ -5,17 +5,20 @@ const Job = require('../models/JobSchema');
 router.get('/', (req, res) => {
     res.send('Backend is running');
 });
-
 router.post('/createjob', async (req, res) => {
-  const {
-    jobTitle, companyName, location, jobType,
+  let {
+    jobTitle, companyName, location, jobtype,
     minsalary, maxsalary, jobDescription,
     applicationDeadline,
   } = req.body;
+console.log('Received job data:', req.body);
+  // Convert salary strings to numbers:
+  minsalary = Number(minsalary);
+  maxsalary = Number(maxsalary);
 
   if (
     !jobTitle || !companyName || !location ||
-    !jobType || minsalary == null ||
+    !jobtype || minsalary == null ||
     maxsalary == null || !jobDescription
   ) {
     return res.status(400)
@@ -27,20 +30,28 @@ router.post('/createjob', async (req, res) => {
       jobTitle,
       companyName,
       location,
-      jobType,
+      jobtype,
       minsalary,
       maxsalary,
-      applicationDeadline,
+      applicationDeadline: new Date(applicationDeadline), // ensure Date type
       jobDescription,
     });
-    console.log(req.body);
+    console.log('Saving job:', newJob);
+
     await newJob.save();
     res.status(201).json({ message: "Job created successfully!" });
   } catch (err) {
     console.error("Error creating job:", err);
+    if (err.name === 'ValidationError') {
+      for (const field in err.errors) {
+        console.error(`Validation error in ${field}: ${err.errors[field].message}`);
+      }
+      return res.status(400).json({ message: err.message, errors: err.errors });
+    }
     res.status(500).json({ message: "Server error while creating job." });
   }
 });
+
 
 router.get('/jobs', async (req, res) => {
     try {
@@ -97,7 +108,7 @@ router.get('/bar', async (req, res) => {
     const jobs = await Job.find({
       $or: [
         { jobTitle: { $regex: searchTerm, $options: 'i' } },  
-        { jobType: { $regex: searchTerm, $options: 'i' } },  
+        { jobtype: { $regex: searchTerm, $options: 'i' } },  
         { location: { $regex: searchTerm, $options: 'i' } },   
         { companyName: { $regex: searchTerm, $options: 'i' } }, 
       ],
