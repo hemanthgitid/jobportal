@@ -7,11 +7,19 @@ router.get('/', (req, res) => {
 });
 
 router.post('/createjob', async (req, res) => {
+  const {
+    jobTitle, companyName, location, jobType,
+    minsalary, maxsalary, jobDescription,
+    applicationDeadline,
+  } = req.body;
 
-const { jobTitle, companyName, location,jobType, minsalary, maxsalary, jobDescription,applicationDeadline } = req.body;
-
-  if (!jobTitle || !companyName || !location || !jobType || minsalary == null || maxsalary == null || !jobDescription) {
-    return res.status(400).json({ message: "All fields are required and must be filled in." });
+  if (
+    !jobTitle || !companyName || !location ||
+    !jobType || minsalary == null ||
+    maxsalary == null || !jobDescription
+  ) {
+    return res.status(400)
+      .json({ message: "All fields including experience are required." });
   }
 
   try {
@@ -25,7 +33,7 @@ const { jobTitle, companyName, location,jobType, minsalary, maxsalary, jobDescri
       applicationDeadline,
       jobDescription,
     });
-    
+    console.log(req.body);
     await newJob.save();
     res.status(201).json({ message: "Job created successfully!" });
   } catch (err) {

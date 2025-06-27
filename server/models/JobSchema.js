@@ -72,13 +72,13 @@ const JobSchema = new mongoose.Schema({
   },
   minExperience: {
     type: Number,
-    required: true,
+    required: false,
     min: 0,
     default:1
   },
   maxExperience: {
     type: Number,
-    required: true,
+    required: false,
     min: 0,
     default:3
   },

@@ -9,23 +9,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CreateJob = ({ createjob }) => {
   const [jobDetails, setJobDetails] = useState({
-    jobTitle: '',
-    companyName: '',
-    location: '',
-    jobType: '',
-    minsalary: '',
-    maxsalary: '',
-    applicationDeadline: new Date().toISOString().split('T')[0],
-    jobDescription: ''
-  });
-
+  jobTitle: '',
+  companyName: '',
+  location: '',
+  jobType: '',
+  minsalary: '',
+  maxsalary: '',
+  applicationDeadline: new Date().toISOString().split('T')[0],
+  jobDescription: ''
+});
   const [errors, setErrors] = useState({
     jobTitle: false,
     companyName: false,
     location: false,
     jobType: false,
     minsalary: false,
-    maxsalary: false,
+    maxsalary: false, 
     applicationDeadline: false,
     jobDescription: false
   });
@@ -75,6 +74,8 @@ const handleSubmit = async (e) => {
   if (isValid) {
     try {
       // Use deployed backend URL here
+      console.log("job details")
+      console.log(jobDetails);
       const response = await axios.post(
         `https://jobportal-2-i5xu.onrender.com/admin/createjob`,
         jobDetails
