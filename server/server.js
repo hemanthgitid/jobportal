@@ -7,11 +7,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://jobportal-3-1gq0.onrender.com'
+];
+
 app.use(cors({
-  origin: 'https://jobportal-3-1gq0.onrender.com', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  
-  credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)

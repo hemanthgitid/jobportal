@@ -26,7 +26,6 @@ const Filtercart = ({range, handlesearch, filterchange }) => {
           />
         </div>
         <hr />
-
         <div className={filetring.filedcenter}>
           <TfiLocationPin size={18} />
           <select name="location" onChange={filterchange}>
