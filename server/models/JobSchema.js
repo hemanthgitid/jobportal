@@ -29,7 +29,6 @@ const JobSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['Fulltime', 'Partime', 'Contract', 'Internship','Onsite'],
-    default: 'Onsite'
   },
    minsalary: {
     type: Number,
