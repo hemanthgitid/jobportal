@@ -1,40 +1,144 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-.navbar_head{
-    width: 890px;
-    min-height: 60px;
-    margin-top: 21px;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+/* Basic navbar styles */
+.navbar_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure navbar is always on top */
 }
 
-.navbar_head ul li{
-    cursor: pointer;
+/* Logo container */
+.logo_container {
+  flex: 1;
 }
-.navbar_head ul {
+
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+/* Mobile menu button */
+.mobile_menu_button {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Navigation links */
+.nav_links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.nav_links li {
+  padding: 0.5rem 1rem;
+}
+
+.create_button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.create_button:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile menu close button */
+.close_button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  /* Hide nav links by default on mobile */
+  .nav_links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Ensure menu doesn't overlap navbar */
+    right: 0;
+    background-color: #333;
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0;
+    z-index: 999; /* Ensure menu is on top */
+  }
+
+  /* Show mobile menu button */
+  .mobile_menu_button {
+    display: block;
+  }
+
+  /* Show nav links when active */
+  .nav_active {
     display: flex;
-    align-items: center;
-    width: 838px;
-    height: 48px;
-    margin-left: 26px;
-    font-size: 16px;
-    justify-content: space-around;
-    list-style-type: none;
-    border-radius:122px;
-    box-shadow: 0px 0px 3px 1px rgba(18, 17, 17, 0.1);    
-     padding: 0.2em;
+  }
+
+  /* Make links occupy full width */
+  .nav_links li {
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .create_button {
+    width: 100%;
+  }
+
+  /* Show close button */
+  .close_button {
+    display: block;
+  }
 }
-.navbar_head ul li button{
-    background-color:blueviolet;
-    color: white;
-    min-width: 100px;
-    cursor: pointer;
-    height: 30px;
-    padding: 0.1em;
-    border: none;
-    border-radius: 30px;
+
+/* Media query for larger screens (default) */
+@media screen and (min-width: 769px) {
+  /* Keep nav links displayed in row layout for large screens */
+  .nav_links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  /* Hide close button for larger screens */
+  .close_button {
+    display: none;
+  }
+}
+
+/* Main content styles */
+.main-content {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  min-height: 100vh; /* Ensure content takes up the full height */
+  margin-top: 80px; /* Ensure content is below the navbar */
+}
+
+/* Optional: If you want a smooth background */
+body {
+  background-color: #eaeaea;
+  margin: 0;
 }
